@@ -22,7 +22,7 @@ async function submitRealChipMatch() {
   statusEl.textContent = 'Transactie opbouwen...';
 
   try {
-    const HELIUS = "https://api.devnet.solana.com";
+    const HELIUS = "https://devnet.helius-rpc.com/?api-key=06f90068-d382-48f2-a4ce-733f4e36cd79";
     const CLUSTER = 456;
     const PROGRAM_ID = new SDK.PublicKey("6xLjbo4yfc5j2CMu69DkycTJrGZttHzeqieXf2NPvu8o");
     const conn = new SDK.Connection(HELIUS, { commitment: "confirmed" });

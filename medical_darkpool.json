@@ -1,23 +1,23 @@
 {
-  "address": "6xLjbo4yfc5j2CMu69DkycTJrGZttHzeqieXf2NPvu8o",
+  "address": "CZQBaJFJnGA2pyEnrfxCmsUewcHJLDGHgzrcVjomzDD4",
   "metadata": {
-    "name": "chip_darkpool",
+    "name": "medical_darkpool",
     "version": "0.1.0",
     "spec": "0.1.0",
     "description": "Created with Arcium & Anchor"
   },
   "instructions": [
     {
-      "name": "aggregate_volume",
+      "name": "aggregate_gradient",
       "discriminator": [
-        118,
-        166,
-        162,
-        105,
-        227,
-        231,
-        255,
-        124
+        195,
+        135,
+        165,
+        17,
+        207,
+        215,
+        226,
+        182
       ],
       "accounts": [
         {
@@ -104,25 +104,7 @@
           "type": "u64"
         },
         {
-          "name": "enc_chip_type",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_volume",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_price",
+          "name": "enc_gradient",
           "type": {
             "array": [
               "u8",
@@ -146,16 +128,16 @@
       ]
     },
     {
-      "name": "aggregate_volume_callback",
+      "name": "aggregate_gradient_callback",
       "discriminator": [
-        224,
-        225,
-        14,
-        236,
-        144,
-        231,
-        133,
-        174
+        122,
+        22,
+        1,
+        17,
+        242,
+        173,
+        194,
+        203
       ],
       "accounts": [
         {
@@ -190,7 +172,7 @@
                   "kind": "type",
                   "type": {
                     "defined": {
-                      "name": "AggregateVolumeOutput"
+                      "name": "AggregateGradientOutput"
                     }
                   }
                 }
@@ -378,16 +360,16 @@
       "args": []
     },
     {
-      "name": "init_aggregate_volume_comp_def",
+      "name": "init_aggregate_comp_def",
       "discriminator": [
-        122,
-        48,
-        21,
-        182,
-        88,
-        239,
-        116,
-        105
+        149,
+        123,
+        55,
+        80,
+        78,
+        128,
+        138,
+        207
       ],
       "accounts": [
         {
@@ -423,61 +405,16 @@
       "args": []
     },
     {
-      "name": "init_match_chip_comp_def",
+      "name": "init_match_comp_def",
       "discriminator": [
-        88,
-        56,
-        208,
-        84,
-        51,
-        96,
-        105,
-        155
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "mxe_account",
-          "writable": true
-        },
-        {
-          "name": "comp_def_account",
-          "writable": true
-        },
-        {
-          "name": "address_lookup_table",
-          "writable": true
-        },
-        {
-          "name": "lut_program",
-          "address": "AddressLookupTab1e1111111111111111111111111"
-        },
-        {
-          "name": "arcium_program",
-          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "init_register_chip_comp_def",
-      "discriminator": [
-        33,
-        179,
-        7,
+        103,
+        234,
+        69,
+        87,
+        11,
+        24,
         229,
-        160,
-        94,
-        132,
-        182
+        221
       ],
       "accounts": [
         {
@@ -513,16 +450,61 @@
       "args": []
     },
     {
-      "name": "match_chip",
+      "name": "init_register_comp_def",
       "discriminator": [
-        209,
-        115,
-        241,
-        170,
-        169,
-        96,
+        177,
+        144,
+        95,
+        41,
         142,
-        101
+        67,
+        109,
+        141
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mxe_account",
+          "writable": true
+        },
+        {
+          "name": "comp_def_account",
+          "writable": true
+        },
+        {
+          "name": "address_lookup_table",
+          "writable": true
+        },
+        {
+          "name": "lut_program",
+          "address": "AddressLookupTab1e1111111111111111111111111"
+        },
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "match_dataset",
+      "discriminator": [
+        65,
+        228,
+        231,
+        219,
+        105,
+        98,
+        191,
+        153
       ],
       "accounts": [
         {
@@ -609,7 +591,7 @@
           "type": "u64"
         },
         {
-          "name": "enc_chip_type",
+          "name": "enc_disease",
           "type": {
             "array": [
               "u8",
@@ -618,7 +600,7 @@
           }
         },
         {
-          "name": "enc_quantity",
+          "name": "enc_samples",
           "type": {
             "array": [
               "u8",
@@ -627,7 +609,7 @@
           }
         },
         {
-          "name": "enc_condition",
+          "name": "enc_age",
           "type": {
             "array": [
               "u8",
@@ -636,7 +618,7 @@
           }
         },
         {
-          "name": "enc_price",
+          "name": "enc_gender",
           "type": {
             "array": [
               "u8",
@@ -645,7 +627,7 @@
           }
         },
         {
-          "name": "enc_delivery",
+          "name": "enc_modality",
           "type": {
             "array": [
               "u8",
@@ -654,7 +636,7 @@
           }
         },
         {
-          "name": "enc_list_region",
+          "name": "enc_q_disease",
           "type": {
             "array": [
               "u8",
@@ -663,7 +645,7 @@
           }
         },
         {
-          "name": "enc_cert",
+          "name": "enc_q_min_samples",
           "type": {
             "array": [
               "u8",
@@ -672,7 +654,7 @@
           }
         },
         {
-          "name": "enc_req_chip_type",
+          "name": "enc_q_age_min",
           "type": {
             "array": [
               "u8",
@@ -681,7 +663,7 @@
           }
         },
         {
-          "name": "enc_min_quantity",
+          "name": "enc_q_age_max",
           "type": {
             "array": [
               "u8",
@@ -690,43 +672,7 @@
           }
         },
         {
-          "name": "enc_max_condition",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_max_price",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_max_delivery",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_req_region",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_min_cert",
+          "name": "enc_q_modality",
           "type": {
             "array": [
               "u8",
@@ -750,16 +696,16 @@
       ]
     },
     {
-      "name": "match_chip_callback",
+      "name": "match_dataset_callback",
       "discriminator": [
-        159,
-        107,
-        7,
-        18,
-        239,
-        163,
-        158,
-        102
+        91,
+        126,
+        169,
+        122,
+        228,
+        196,
+        165,
+        32
       ],
       "accounts": [
         {
@@ -794,7 +740,7 @@
                   "kind": "type",
                   "type": {
                     "defined": {
-                      "name": "MatchChipOutput"
+                      "name": "MatchDatasetOutput"
                     }
                   }
                 }
@@ -805,16 +751,16 @@
       ]
     },
     {
-      "name": "register_chip",
+      "name": "register_dataset",
       "discriminator": [
-        27,
-        126,
-        180,
-        110,
-        111,
-        12,
-        74,
-        225
+        66,
+        242,
+        18,
+        29,
+        168,
+        185,
+        60,
+        26
       ],
       "accounts": [
         {
@@ -901,7 +847,7 @@
           "type": "u64"
         },
         {
-          "name": "enc_chip_type",
+          "name": "enc_disease",
           "type": {
             "array": [
               "u8",
@@ -910,7 +856,7 @@
           }
         },
         {
-          "name": "enc_quantity",
+          "name": "enc_samples",
           "type": {
             "array": [
               "u8",
@@ -919,7 +865,7 @@
           }
         },
         {
-          "name": "enc_condition",
+          "name": "enc_age",
           "type": {
             "array": [
               "u8",
@@ -928,7 +874,7 @@
           }
         },
         {
-          "name": "enc_price",
+          "name": "enc_gender",
           "type": {
             "array": [
               "u8",
@@ -937,25 +883,7 @@
           }
         },
         {
-          "name": "enc_delivery",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_region",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_cert",
+          "name": "enc_modality",
           "type": {
             "array": [
               "u8",
@@ -979,16 +907,16 @@
       ]
     },
     {
-      "name": "register_chip_callback",
+      "name": "register_dataset_callback",
       "discriminator": [
-        221,
-        88,
-        119,
-        1,
-        73,
-        145,
-        208,
-        185
+        81,
+        7,
+        111,
+        146,
+        21,
+        48,
+        150,
+        87
       ],
       "accounts": [
         {
@@ -1023,7 +951,7 @@
                   "kind": "type",
                   "type": {
                     "defined": {
-                      "name": "RegisterChipOutput"
+                      "name": "RegisterDatasetOutput"
                     }
                   }
                 }
@@ -1189,29 +1117,29 @@
   ],
   "events": [
     {
-      "name": "ChipMatchedEvent",
+      "name": "DatasetMatchedEvent",
       "discriminator": [
-        106,
-        10,
-        13,
-        89,
+        124,
         118,
-        79,
-        178,
-        132
+        44,
+        213,
+        230,
+        163,
+        181,
+        96
       ]
     },
     {
-      "name": "ChipRegisteredEvent",
+      "name": "DatasetRegisteredEvent",
       "discriminator": [
-        45,
-        209,
-        187,
-        43,
-        154,
-        216,
-        117,
-        242
+        174,
+        201,
+        139,
+        6,
+        173,
+        248,
+        84,
+        60
       ]
     },
     {
@@ -1267,16 +1195,16 @@
       ]
     },
     {
-      "name": "VolumeAggregatedEvent",
+      "name": "GradientAggregatedEvent",
       "discriminator": [
-        90,
-        88,
-        226,
-        22,
-        84,
-        121,
-        15,
-        14
+        166,
+        127,
+        192,
+        222,
+        105,
+        34,
+        216,
+        106
       ]
     }
   ],
@@ -1289,32 +1217,32 @@
     {
       "code": 6001,
       "name": "InvalidEscrowAmount",
-      "msg": "Escrow-bedrag moet groter dan nul zijn"
+      "msg": "Escrow amount must be greater than zero"
     },
     {
       "code": 6002,
       "name": "InvalidEscrowStatus",
-      "msg": "Escrow staat niet in de verwachte status voor deze actie"
+      "msg": "Escrow is not in the required status for this action"
     },
     {
       "code": 6003,
       "name": "UnauthorizedEscrowAction",
-      "msg": "Alleen koper of verkoper mag dit escrow-account aanroepen"
+      "msg": "This account is not authorized to perform this escrow action"
     },
     {
       "code": 6004,
-      "name": "UnauthorizedArbiter",
-      "msg": "Alleen de multisig-vault mag een geschil beslechten"
+      "name": "DisputeWindowClosed",
+      "msg": "The dispute window for this escrow has closed"
     },
     {
       "code": 6005,
-      "name": "DisputeWindowClosed",
-      "msg": "Dispute-termijn is al verstreken"
+      "name": "DisputeWindowStillOpen",
+      "msg": "The dispute window for this escrow is still open"
     },
     {
       "code": 6006,
-      "name": "DisputeWindowStillOpen",
-      "msg": "Dispute-termijn is nog niet verstreken"
+      "name": "UnauthorizedArbiter",
+      "msg": "Only the vault PDA (multisig) may resolve a dispute"
     }
   ],
   "types": [
@@ -1343,7 +1271,7 @@
       }
     },
     {
-      "name": "AggregateVolumeOutput",
+      "name": "AggregateGradientOutput",
       "docs": [
         "The output of the callback instruction. Provided as a struct with ordered fields",
         "as anchor does not support tuples and tuple structs yet."
@@ -1390,67 +1318,6 @@
               "u8",
               64
             ]
-          }
-        ]
-      }
-    },
-    {
-      "name": "ChipMatchedEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "matched",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "score",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "nonce",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "ChipRegisteredEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "result",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "nonce",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
           }
         ]
       }
@@ -1756,6 +1623,67 @@
       }
     },
     {
+      "name": "DatasetMatchedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "compatible",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "score",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "DatasetRegisteredEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "result",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "Epoch",
       "docs": [
         "The network epoch"
@@ -1911,6 +1839,32 @@
           {
             "name": "bump",
             "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GradientAggregatedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "result",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
           }
         ]
       }
@@ -2102,7 +2056,7 @@
       }
     },
     {
-      "name": "MatchChipOutput",
+      "name": "MatchDatasetOutput",
       "docs": [
         "The output of the callback instruction. Provided as a struct with ordered fields",
         "as anchor does not support tuples and tuple structs yet."
@@ -2365,7 +2319,7 @@
       }
     },
     {
-      "name": "RegisterChipOutput",
+      "name": "RegisterDatasetOutput",
       "docs": [
         "The output of the callback instruction. Provided as a struct with ordered fields",
         "as anchor does not support tuples and tuple structs yet."
@@ -2561,32 +2515,6 @@
               "array": [
                 "u8",
                 64
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "VolumeAggregatedEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "result",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "nonce",
-            "type": {
-              "array": [
-                "u8",
-                16
               ]
             }
           }

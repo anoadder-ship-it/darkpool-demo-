@@ -1,22 +1,17 @@
-// === ECHTE on-chain chip-match via Phantom + Arcium MPC ===
-// Vervangt de client-side simulatie door een echte matchChip-transactie.
-
-function readUInt32LE(bytes) {
-  return ((bytes[0]) | (bytes[1] << 8) | (bytes[2] << 16) | (bytes[3] << 24)) >>> 0;
-}
-
-async function submitRealChipMatch() {
+// === ECHTE on-chain supply-match via Phantom + Arcium MPC ===
+// Hergebruikt pollForResult() en showResult() uit trading-real-app.js
+async function submitRealSupplyMatch() {
   if (!wPub) { alert('Verbind eerst je Phantom wallet.'); return; }
   const SDK = window.DarkpoolSDK;
   const phantomProvider = window.phantom && window.phantom.solana || window.solana;
 
-  const btn = document.getElementById('bc');
+  const btn = document.getElementById('bs');
   btn.disabled = true;
-  const statusEl = document.getElementById('rc-status') || (function(){
+  const statusEl = document.getElementById('rs-status') || (function(){
     const d = document.createElement('div');
-    d.id = 'rc-status';
+    d.id = 'rs-status';
     d.style.cssText = 'font-size:12px;color:var(--text2);margin-top:8px';
-    document.getElementById('rc').parentNode.appendChild(d);
+    document.getElementById('rs').parentNode.appendChild(d);
     return d;
   })();
   statusEl.textContent = 'Transactie opbouwen...';
@@ -24,7 +19,7 @@ async function submitRealChipMatch() {
   try {
     const HELIUS = "https://devnet.helius-rpc.com/?api-key=a17d9b5b-f33c-4c56-ad16-84bb71b13779";
     const CLUSTER = 456;
-    const PROGRAM_ID = new SDK.PublicKey("6xLjbo4yfc5j2CMu69DkycTJrGZttHzeqieXf2NPvu8o");
+    const PROGRAM_ID = new SDK.PublicKey("3HQHpSBSgYkx81E25bSJZVz4mGoW6nQFJWDtZL9fmMR4");
     const conn = new SDK.Connection(HELIUS, { commitment: "confirmed" });
 
     const ownerPubkey = new SDK.PublicKey(wPub);
@@ -35,7 +30,7 @@ async function submitRealChipMatch() {
     };
     const provider = new SDK.anchor.AnchorProvider(conn, wallet, { commitment: "confirmed" });
 
-    const idlResp = await fetch('chip_darkpool.json');
+    const idlResp = await fetch('supply_chain_darkpool.json');
     const IDL = await idlResp.json();
     IDL.address = PROGRAM_ID.toBase58();
     const prog = new SDK.anchor.Program(IDL, provider);
@@ -47,26 +42,24 @@ async function submitRealChipMatch() {
     const cipher = new SDK.RescueCipher(SDK.x25519.getSharedSecret(priv, mxeKey));
     const pubArr = Array.from(SDK.x25519.getPublicKey(priv));
 
-    // Waarden uit de UI (met zinnige defaults voor velden die de UI niet toont)
-    const chip = +document.getElementById('c-chip').value;
-    const qty = +document.getElementById('c-qty').value;
-    const cond = +document.getElementById('c-cond').value;
-    const price = +document.getElementById('c-price').value;
-    const del = +document.getElementById('c-del').value;
-    const region = +document.getElementById('c-reg').value;
-    const cert = 1; // datacenter (default, niet in UI)
+    const material = +document.getElementById('sm').value;
+    const qty = +document.getElementById('sq').value;
+    const quality = +document.getElementById('sql').value;
+    const price = +document.getElementById('sp').value;
+    const delivery = +document.getElementById('sd').value;
+    const region = +document.getElementById('sr').value;
 
-    const qchip = +document.getElementById('c-qchip').value;
-    const qmin = +document.getElementById('c-qmin').value;
-    const qprice = +document.getElementById('c-qprice').value;
-    const qdel = +document.getElementById('c-qdel').value;
-    const qmaxcond = 3;   // accepteert tot Used (default, niet in UI)
-    const qregion = 4;    // Global — accepteert elke regio (default)
-    const qmincert = 1;   // minimaal datacenter (default)
+    const qMaterial = +document.getElementById('sqm').value;
+    const qMinQty = +document.getElementById('sqn').value;
+    const qMinQuality = +document.getElementById('sqql').value;
+    const qMaxPrice = +document.getElementById('sqp').value;
+    // UI toont geen 'max delivery' en 'regio' voor de vraagzijde -- zinnige defaults.
+    const qMaxDelivery = 30;
+    const qRegion = region; // default: zelfde regio als aanbod (niet in UI)
 
     const vals = [
-      chip, qty, cond, price, del, region, cert,
-      qchip, qmin, qmaxcond, qprice, qdel, qregion, qmincert,
+      material, qty, quality, price, delivery, region,
+      qMaterial, qMinQty, qMinQuality, qMaxPrice, qMaxDelivery, qRegion,
     ].map(BigInt);
 
     const nb = SDK.randomBytes(16);
@@ -74,6 +67,9 @@ async function submitRealChipMatch() {
     const nonce = new SDK.BN(SDK.deserializeLE(nb).toString());
     const off = new SDK.BN(SDK.randomBytes(8), 'hex');
 
+    function readUInt32LE(bytes) {
+      return ((bytes[0]) | (bytes[1] << 8) | (bytes[2] << 16) | (bytes[3] << 24)) >>> 0;
+    }
     const accs = {
       computationAccount: SDK.getComputationAccAddress(CLUSTER, off),
       clusterAccount: SDK.getClusterAccAddress(CLUSTER),
@@ -82,14 +78,14 @@ async function submitRealChipMatch() {
       executingPool: SDK.getExecutingPoolAccAddress(CLUSTER),
       compDefAccount: SDK.getCompDefAccAddress(
         PROGRAM_ID,
-        readUInt32LE(SDK.getCompDefAccOffset('match_chip'))
+        readUInt32LE(SDK.getCompDefAccOffset('match_supply'))
       ),
     };
 
     statusEl.textContent = 'Wachten op Phantom-ondertekening...';
-    const tx = await prog.methods.matchChip(
-      off, cts[0], cts[1], cts[2], cts[3], cts[4], cts[5], cts[6],
-      cts[7], cts[8], cts[9], cts[10], cts[11], cts[12], cts[13],
+    const tx = await prog.methods.matchSupply(
+      off, cts[0], cts[1], cts[2], cts[3], cts[4], cts[5],
+      cts[6], cts[7], cts[8], cts[9], cts[10], cts[11],
       pubArr, nonce
     ).accountsPartial(accs)
      .preInstructions([SDK.ComputeBudgetProgram.setComputeUnitLimit({ units: 1_400_000 })])
@@ -111,7 +107,7 @@ async function submitRealChipMatch() {
     const baseline = new Set((await conn.getSignaturesForAddress(PROGRAM_ID, { limit: 20 })).map(s => s.signature));
     baseline.delete(sig);
 
-    const result = await pollForResult(conn, prog, cipher, compAccBase58, baseline, 180000, 'chipMatchedEvent');
+    const result = await pollForResult(conn, prog, cipher, compAccBase58, baseline, 180000, 'supplyMatchedEvent');
 
     if (!result) {
       statusEl.textContent = 'Nog geen MPC-resultaat na 180s. De transactie zelf is wel geslaagd on-chain -- de Arcium MPC-cluster op devnet kan soms langer nodig hebben. Probeer het later opnieuw.';
@@ -121,14 +117,10 @@ async function submitRealChipMatch() {
 
     const matched = result[0] === 1n;
     const score = result[1];
-    document.getElementById('fc-chip').textContent = (window.cn && window.cn[chip] || chip) + ' (' + chip + ')';
-    const v = document.getElementById('rc-v');
     if (matched) {
-      show('c', 'matched = 1', 'Score: ' + score + '/98 — ECHT on-chain resultaat', 'ok');
-      v.className = 'rv g';
+      show('s', 'matched = 1', 'Score: ' + score + '/96 — ECHT on-chain resultaat', 'ok');
     } else {
-      show('c', 'matched = 0', 'Score: ' + score + '/98 — ECHT on-chain resultaat', '');
-      v.className = 'rv';
+      show('s', 'matched = 0', 'Score: ' + score + '/96 — ECHT on-chain resultaat', '');
     }
     statusEl.textContent = 'Klaar — resultaat rechtstreeks van Arcium MPC-callback.';
   } catch (e) {

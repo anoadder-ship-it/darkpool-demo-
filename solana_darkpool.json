@@ -1,23 +1,23 @@
 {
-  "address": "6xLjbo4yfc5j2CMu69DkycTJrGZttHzeqieXf2NPvu8o",
+  "address": "h6zsnHt28NpeS94Ek3fQP1YEiu1WrpGT2pKynWZzKVX",
   "metadata": {
-    "name": "chip_darkpool",
+    "name": "solana_darkpool",
     "version": "0.1.0",
     "spec": "0.1.0",
     "description": "Created with Arcium & Anchor"
   },
   "instructions": [
     {
-      "name": "aggregate_volume",
+      "name": "cancel_order",
       "discriminator": [
-        118,
-        166,
-        162,
-        105,
-        227,
-        231,
-        255,
-        124
+        95,
+        129,
+        237,
+        240,
+        8,
+        49,
+        223,
+        132
       ],
       "accounts": [
         {
@@ -104,25 +104,7 @@
           "type": "u64"
         },
         {
-          "name": "enc_chip_type",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_volume",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_price",
+          "name": "encrypted_order_id",
           "type": {
             "array": [
               "u8",
@@ -146,16 +128,16 @@
       ]
     },
     {
-      "name": "aggregate_volume_callback",
+      "name": "cancel_order_callback",
       "discriminator": [
-        224,
-        225,
-        14,
-        236,
-        144,
-        231,
-        133,
-        174
+        138,
+        34,
+        29,
+        233,
+        240,
+        8,
+        211,
+        42
       ],
       "accounts": [
         {
@@ -190,7 +172,7 @@
                   "kind": "type",
                   "type": {
                     "defined": {
-                      "name": "AggregateVolumeOutput"
+                      "name": "CancelOrderOutput"
                     }
                   }
                 }
@@ -378,151 +360,16 @@
       "args": []
     },
     {
-      "name": "init_aggregate_volume_comp_def",
+      "name": "get_stats",
       "discriminator": [
-        122,
-        48,
-        21,
-        182,
-        88,
-        239,
-        116,
-        105
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "mxe_account",
-          "writable": true
-        },
-        {
-          "name": "comp_def_account",
-          "writable": true
-        },
-        {
-          "name": "address_lookup_table",
-          "writable": true
-        },
-        {
-          "name": "lut_program",
-          "address": "AddressLookupTab1e1111111111111111111111111"
-        },
-        {
-          "name": "arcium_program",
-          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "init_match_chip_comp_def",
-      "discriminator": [
-        88,
-        56,
-        208,
-        84,
-        51,
-        96,
-        105,
-        155
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "mxe_account",
-          "writable": true
-        },
-        {
-          "name": "comp_def_account",
-          "writable": true
-        },
-        {
-          "name": "address_lookup_table",
-          "writable": true
-        },
-        {
-          "name": "lut_program",
-          "address": "AddressLookupTab1e1111111111111111111111111"
-        },
-        {
-          "name": "arcium_program",
-          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "init_register_chip_comp_def",
-      "discriminator": [
-        33,
-        179,
-        7,
-        229,
-        160,
-        94,
-        132,
-        182
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "mxe_account",
-          "writable": true
-        },
-        {
-          "name": "comp_def_account",
-          "writable": true
-        },
-        {
-          "name": "address_lookup_table",
-          "writable": true
-        },
-        {
-          "name": "lut_program",
-          "address": "AddressLookupTab1e1111111111111111111111111"
-        },
-        {
-          "name": "arcium_program",
-          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "match_chip",
-      "discriminator": [
-        209,
-        115,
         241,
-        170,
-        169,
-        96,
-        142,
-        101
+        65,
+        112,
+        185,
+        230,
+        140,
+        139,
+        177
       ],
       "accounts": [
         {
@@ -609,7 +456,7 @@
           "type": "u64"
         },
         {
-          "name": "enc_chip_type",
+          "name": "encrypted_buy_vol",
           "type": {
             "array": [
               "u8",
@@ -618,115 +465,7 @@
           }
         },
         {
-          "name": "enc_quantity",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_condition",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_price",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_delivery",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_list_region",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_cert",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_req_chip_type",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_min_quantity",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_max_condition",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_max_price",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_max_delivery",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_req_region",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_min_cert",
+          "name": "encrypted_sell_vol",
           "type": {
             "array": [
               "u8",
@@ -750,16 +489,16 @@
       ]
     },
     {
-      "name": "match_chip_callback",
+      "name": "get_stats_callback",
       "discriminator": [
-        159,
-        107,
-        7,
-        18,
-        239,
-        163,
-        158,
-        102
+        26,
+        199,
+        188,
+        68,
+        186,
+        134,
+        187,
+        59
       ],
       "accounts": [
         {
@@ -794,7 +533,7 @@
                   "kind": "type",
                   "type": {
                     "defined": {
-                      "name": "MatchChipOutput"
+                      "name": "GetStatsOutput"
                     }
                   }
                 }
@@ -805,16 +544,196 @@
       ]
     },
     {
-      "name": "register_chip",
+      "name": "init_cancel_order_comp_def",
       "discriminator": [
-        27,
-        126,
-        180,
-        110,
+        108,
+        87,
+        164,
+        9,
+        148,
+        83,
+        58,
+        188
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mxe_account",
+          "writable": true
+        },
+        {
+          "name": "comp_def_account",
+          "writable": true
+        },
+        {
+          "name": "address_lookup_table",
+          "writable": true
+        },
+        {
+          "name": "lut_program",
+          "address": "AddressLookupTab1e1111111111111111111111111"
+        },
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "init_get_stats_comp_def",
+      "discriminator": [
+        97,
         111,
-        12,
-        74,
-        225
+        144,
+        220,
+        72,
+        166,
+        26,
+        163
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mxe_account",
+          "writable": true
+        },
+        {
+          "name": "comp_def_account",
+          "writable": true
+        },
+        {
+          "name": "address_lookup_table",
+          "writable": true
+        },
+        {
+          "name": "lut_program",
+          "address": "AddressLookupTab1e1111111111111111111111111"
+        },
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "init_match_orders_comp_def",
+      "discriminator": [
+        18,
+        227,
+        152,
+        150,
+        221,
+        199,
+        95,
+        156
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mxe_account",
+          "writable": true
+        },
+        {
+          "name": "comp_def_account",
+          "writable": true
+        },
+        {
+          "name": "address_lookup_table",
+          "writable": true
+        },
+        {
+          "name": "lut_program",
+          "address": "AddressLookupTab1e1111111111111111111111111"
+        },
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "init_place_order_comp_def",
+      "discriminator": [
+        245,
+        242,
+        169,
+        71,
+        130,
+        168,
+        97,
+        247
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mxe_account",
+          "writable": true
+        },
+        {
+          "name": "comp_def_account",
+          "writable": true
+        },
+        {
+          "name": "address_lookup_table",
+          "writable": true
+        },
+        {
+          "name": "lut_program",
+          "address": "AddressLookupTab1e1111111111111111111111111"
+        },
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "match_orders",
+      "discriminator": [
+        17,
+        1,
+        201,
+        93,
+        7,
+        51,
+        251,
+        134
       ],
       "accounts": [
         {
@@ -901,7 +820,7 @@
           "type": "u64"
         },
         {
-          "name": "enc_chip_type",
+          "name": "encrypted_buy_bid",
           "type": {
             "array": [
               "u8",
@@ -910,52 +829,7 @@
           }
         },
         {
-          "name": "enc_quantity",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_condition",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_price",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_delivery",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_region",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_cert",
+          "name": "encrypted_sell_bid",
           "type": {
             "array": [
               "u8",
@@ -979,16 +853,16 @@
       ]
     },
     {
-      "name": "register_chip_callback",
+      "name": "match_orders_callback",
       "discriminator": [
-        221,
-        88,
-        119,
-        1,
-        73,
-        145,
-        208,
-        185
+        245,
+        106,
+        13,
+        232,
+        202,
+        127,
+        239,
+        31
       ],
       "accounts": [
         {
@@ -1023,7 +897,200 @@
                   "kind": "type",
                   "type": {
                     "defined": {
-                      "name": "RegisterChipOutput"
+                      "name": "MatchOrdersOutput"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "place_order",
+      "discriminator": [
+        51,
+        194,
+        155,
+        175,
+        109,
+        130,
+        96,
+        106
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "sign_pda_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  65,
+                  114,
+                  99,
+                  105,
+                  117,
+                  109,
+                  83,
+                  105,
+                  103,
+                  110,
+                  101,
+                  114,
+                  65,
+                  99,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mxe_account"
+        },
+        {
+          "name": "mempool_account",
+          "writable": true
+        },
+        {
+          "name": "executing_pool",
+          "writable": true
+        },
+        {
+          "name": "computation_account",
+          "writable": true
+        },
+        {
+          "name": "comp_def_account"
+        },
+        {
+          "name": "cluster_account",
+          "writable": true
+        },
+        {
+          "name": "pool_account",
+          "writable": true,
+          "address": "G2sRWJvi3xoyh5k2gY49eG9L8YhAEWQPtNb1zb1GXTtC"
+        },
+        {
+          "name": "clock_account",
+          "writable": true,
+          "address": "7EbMUTLo5DjdzbN7s8BXeZwXzEwNQb1hScfRvWg8a6ot"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        }
+      ],
+      "args": [
+        {
+          "name": "computation_offset",
+          "type": "u64"
+        },
+        {
+          "name": "encrypted_bid",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "encrypted_size",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "encrypted_is_buy",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "pubkey",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "nonce",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "place_order_callback",
+      "discriminator": [
+        246,
+        190,
+        154,
+        146,
+        44,
+        11,
+        105,
+        44
+      ],
+      "accounts": [
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        },
+        {
+          "name": "comp_def_account"
+        },
+        {
+          "name": "mxe_account"
+        },
+        {
+          "name": "computation_account"
+        },
+        {
+          "name": "cluster_account"
+        },
+        {
+          "name": "instructions_sysvar",
+          "address": "Sysvar1nstructions1111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "output",
+          "type": {
+            "defined": {
+              "name": "SignedComputationOutputs",
+              "generics": [
+                {
+                  "kind": "type",
+                  "type": {
+                    "defined": {
+                      "name": "PlaceOrderOutput"
                     }
                   }
                 }
@@ -1157,6 +1224,54 @@
           "type": "bool"
         }
       ]
+    },
+    {
+      "name": "send_heartbeat",
+      "discriminator": [
+        75,
+        63,
+        64,
+        229,
+        162,
+        200,
+        239,
+        43
+      ],
+      "accounts": [
+        {
+          "name": "pool",
+          "writable": true
+        },
+        {
+          "name": "signer",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "trigger_moeras",
+      "discriminator": [
+        9,
+        60,
+        135,
+        177,
+        221,
+        77,
+        69,
+        141
+      ],
+      "accounts": [
+        {
+          "name": "pool",
+          "writable": true
+        },
+        {
+          "name": "signer",
+          "signer": true
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -1185,35 +1300,22 @@
         125,
         135
       ]
+    },
+    {
+      "name": "PoolState",
+      "discriminator": [
+        247,
+        237,
+        227,
+        245,
+        215,
+        195,
+        222,
+        70
+      ]
     }
   ],
   "events": [
-    {
-      "name": "ChipMatchedEvent",
-      "discriminator": [
-        106,
-        10,
-        13,
-        89,
-        118,
-        79,
-        178,
-        132
-      ]
-    },
-    {
-      "name": "ChipRegisteredEvent",
-      "discriminator": [
-        45,
-        209,
-        187,
-        43,
-        154,
-        216,
-        117,
-        242
-      ]
-    },
     {
       "name": "EscrowCreatedEvent",
       "discriminator": [
@@ -1267,54 +1369,98 @@
       ]
     },
     {
-      "name": "VolumeAggregatedEvent",
+      "name": "MatchEvent",
       "discriminator": [
-        90,
-        88,
-        226,
-        22,
-        84,
-        121,
-        15,
-        14
+        0,
+        93,
+        216,
+        57,
+        140,
+        40,
+        66,
+        151
+      ]
+    },
+    {
+      "name": "OrderCancelledEvent",
+      "discriminator": [
+        200,
+        73,
+        179,
+        145,
+        247,
+        176,
+        10,
+        101
+      ]
+    },
+    {
+      "name": "OrderPlacedEvent",
+      "discriminator": [
+        245,
+        198,
+        202,
+        247,
+        110,
+        231,
+        254,
+        156
+      ]
+    },
+    {
+      "name": "StatsEvent",
+      "discriminator": [
+        148,
+        166,
+        57,
+        32,
+        106,
+        208,
+        221,
+        21
       ]
     }
   ],
   "errors": [
     {
       "code": 6000,
+      "name": "UnauthorizedGuardian",
+      "msg": "Onbevoegde aanroep. Alleen de DGX Spark Guardian mag dit doen."
+    },
+    {
+      "code": 6001,
       "name": "AbortedComputation",
       "msg": "The computation was aborted"
     },
     {
-      "code": 6001,
-      "name": "InvalidEscrowAmount",
-      "msg": "Escrow-bedrag moet groter dan nul zijn"
-    },
-    {
       "code": 6002,
-      "name": "InvalidEscrowStatus",
-      "msg": "Escrow staat niet in de verwachte status voor deze actie"
+      "name": "InvalidEscrowAmount",
+      "msg": "Escrow amount must be greater than zero"
     },
     {
       "code": 6003,
-      "name": "UnauthorizedEscrowAction",
-      "msg": "Alleen koper of verkoper mag dit escrow-account aanroepen"
+      "name": "InvalidEscrowStatus",
+      "msg": "Escrow is not in the required status for this action"
     },
     {
       "code": 6004,
-      "name": "UnauthorizedArbiter",
-      "msg": "Alleen de multisig-vault mag een geschil beslechten"
+      "name": "UnauthorizedEscrowAction",
+      "msg": "This account is not authorized to perform this escrow action"
     },
     {
       "code": 6005,
       "name": "DisputeWindowClosed",
-      "msg": "Dispute-termijn is al verstreken"
+      "msg": "The dispute window for this escrow has closed"
     },
     {
       "code": 6006,
       "name": "DisputeWindowStillOpen",
-      "msg": "Dispute-termijn is nog niet verstreken"
+      "msg": "The dispute window for this escrow is still open"
+    },
+    {
+      "code": 6007,
+      "name": "UnauthorizedArbiter",
+      "msg": "Only the vault PDA (multisig) may resolve a dispute"
     }
   ],
   "types": [
@@ -1336,32 +1482,6 @@
             "type": {
               "defined": {
                 "name": "Epoch"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "AggregateVolumeOutput",
-      "docs": [
-        "The output of the callback instruction. Provided as a struct with ordered fields",
-        "as anchor does not support tuples and tuple structs yet."
-      ],
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "field_0",
-            "type": {
-              "defined": {
-                "name": "SharedEncryptedStruct",
-                "generics": [
-                  {
-                    "kind": "const",
-                    "value": "1"
-                  }
-                ]
               }
             }
           }
@@ -1395,61 +1515,26 @@
       }
     },
     {
-      "name": "ChipMatchedEvent",
+      "name": "CancelOrderOutput",
+      "docs": [
+        "The output of the callback instruction. Provided as a struct with ordered fields",
+        "as anchor does not support tuples and tuple structs yet."
+      ],
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "matched",
+            "name": "field_0",
             "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "score",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "nonce",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "ChipRegisteredEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "result",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "nonce",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
+              "defined": {
+                "name": "SharedEncryptedStruct",
+                "generics": [
+                  {
+                    "kind": "const",
+                    "value": "1"
+                  }
+                ]
+              }
             }
           }
         ]
@@ -1916,6 +2001,32 @@
       }
     },
     {
+      "name": "GetStatsOutput",
+      "docs": [
+        "The output of the callback instruction. Provided as a struct with ordered fields",
+        "as anchor does not support tuples and tuple structs yet."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "field_0",
+            "type": {
+              "defined": {
+                "name": "SharedEncryptedStruct",
+                "generics": [
+                  {
+                    "kind": "const",
+                    "value": "1"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "LeaderChoice",
       "docs": [
         "The computation chosen by a node to be executed when the node is leader."
@@ -2102,7 +2213,33 @@
       }
     },
     {
-      "name": "MatchChipOutput",
+      "name": "MatchEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "result",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MatchOrdersOutput",
       "docs": [
         "The output of the callback instruction. Provided as a struct with ordered fields",
         "as anchor does not support tuples and tuple structs yet."
@@ -2118,7 +2255,7 @@
                 "generics": [
                   {
                     "kind": "const",
-                    "value": "2"
+                    "value": "1"
                   }
                 ]
               }
@@ -2239,6 +2376,58 @@
           {
             "name": "upload_auth",
             "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "OrderCancelledEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "result",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "OrderPlacedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "result",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
           }
         ]
       }
@@ -2365,7 +2554,7 @@
       }
     },
     {
-      "name": "RegisterChipOutput",
+      "name": "PlaceOrderOutput",
       "docs": [
         "The output of the callback instruction. Provided as a struct with ordered fields",
         "as anchor does not support tuples and tuple structs yet."
@@ -2386,6 +2575,44 @@
                 ]
               }
             }
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "guardian",
+            "type": "pubkey"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "PoolStatus"
+              }
+            }
+          },
+          {
+            "name": "last_heartbeat_slot",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Moeras"
           }
         ]
       }
@@ -2512,6 +2739,32 @@
       }
     },
     {
+      "name": "StatsEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "result",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "Timestamp",
       "type": {
         "kind": "struct",
@@ -2561,32 +2814,6 @@
               "array": [
                 "u8",
                 64
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "VolumeAggregatedEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "result",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "nonce",
-            "type": {
-              "array": [
-                "u8",
-                16
               ]
             }
           }

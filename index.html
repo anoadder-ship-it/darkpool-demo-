@@ -94,6 +94,13 @@ input:focus,select:focus{border-color:var(--accent)}
 footer{border-top:1px solid var(--border);padding:1.25rem 2rem;text-align:center;font-size:11px;color:var(--text3)}
 footer a{color:var(--accent-txt);text-decoration:none}
 footer a:hover{text-decoration:underline}
+.elog{margin-top:14px;max-height:320px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r)}
+.elog .log-entry{padding:8px 10px;font-size:12px;font-family:var(--mono);white-space:pre-wrap;word-break:break-all;border-bottom:1px solid var(--border)}
+.elog .log-entry:last-child{border-bottom:none}
+.elog .log-entry.ok{color:var(--ok)}
+.elog .log-entry.err{color:#ef4444}
+.elog .log-ts{color:var(--text3)}
+.ewarn{font-size:12px;color:var(--text2);background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;margin-bottom:14px}
 </style>
 </head>
 <body><div id="wbar" style="display:flex;align-items:center;gap:12px;padding:8px 16px;background:rgba(0,0,0,0.3);border-bottom:1px solid rgba(255,255,255,0.08)"><button id="wbtn" onclick="connectWallet()" style="background:#AB9FF2;color:#1a1a2e;border:none;padding:7px 16px;border-radius:8px;font-weight:700;cursor:pointer">Connect Phantom</button><span id="waddr" style="font-family:monospace;opacity:0.6;font-size:11px"></span><span id="wbal" style="opacity:0.5;font-size:11px"></span></div>
@@ -147,6 +154,7 @@ footer a:hover{text-decoration:underline}
   <button class="tab" onclick="setTab('m')">&#127973; Medical</button>
   <button class="tab" onclick="setTab('s')">&#127981; Supply chain</button>
     <button class="tab" onclick="setTab('c')">&#129706; Chip marketplace</button>
+    <button class="tab" onclick="setTab('e')">&#128274; Escrow</button>
 </div>
 
 <!-- TRADING -->
@@ -163,7 +171,7 @@ footer a:hover{text-decoration:underline}
       <div class="fi"><label>Ask price</label><input type="number" id="t-sb" value="95"></div>
       <div class="fi"><label>Size</label><input type="number" id="t-ss" value="10"></div>
     </div>
-    <button class="btn" id="bt" onclick="runT()">Encrypt &amp; match orders</button>
+    <button class="btn" id="bt" onclick="submitRealTradingMatch()">Encrypt &amp; match orders (echt, on-chain)</button>
     <div class="cl">
       <div class="cr"><div class="cn">1</div><span>Values encrypted — MPC never sees bid prices</span></div>
       <div class="cr"><div class="cn">2</div><span>Circuit checks buy_bid &ge; sell_bid over ciphertexts</span></div>
@@ -208,7 +216,7 @@ footer a:hover{text-decoration:underline}
       <div class="fi"><label>Age min (x10)</label><input type="number" id="mqai" value="500"></div>
       <div class="fi"><label>Age max (x10)</label><input type="number" id="mqax" value="700"></div>
     </div>
-    <button class="btn" id="bm" onclick="runM()">Encrypt &amp; check compatibility</button>
+    <button class="btn" id="bm" onclick="submitRealMedicalMatch()">Encrypt &amp; check compatibility (echt, on-chain)</button>
     <div class="cl">
       <div class="cr"><div class="cn">1</div><span>Disease, samples, age, modality all encrypted</span></div>
       <div class="cr"><div class="cn">2</div><span>MPC computes 4 criteria x 25 pts = max 100</span></div>
@@ -258,7 +266,7 @@ footer a:hover{text-decoration:underline}
       <div class="fi"><label>Min quality</label><input type="number" id="sqql" value="80"></div>
       <div class="fi"><label>Max price (ct)</label><input type="number" id="sqp" value="200"></div>
     </div>
-    <button class="btn" id="bs" onclick="runS()">Encrypt &amp; find match</button>
+    <button class="btn" id="bs" onclick="submitRealSupplyMatch()">Encrypt &amp; find match (echt, on-chain)</button>
     <div class="cl">
       <div class="cr"><div class="cn">1</div><span>6 criteria encrypted: material, qty, quality, price, delivery, region</span></div>
       <div class="cr"><div class="cn">2</div><span>MPC checks all 6 simultaneously — neither side sees the other</span></div>
@@ -356,6 +364,45 @@ footer a:hover{text-decoration:underline}
   </div>
 </div>
 
+<div id="pane-e" class="pane">
+  <div class="card">
+    <div class="stitle">Escrow — koper/verkoper-bescherming met multisig-arbitrage</div>
+    <div class="ewarn">
+      Dit toont het escrow-mechanisme dat alle vier darkpools standaard hebben:
+      koper stort SOL, verkoper claimt na levering, of koper disput binnen 7 dagen.
+      Disputes worden beslecht via een Squads 2-van-3-multisig van het Dark Matter Labs-team
+      (buiten deze demo om — <code>resolve_dispute</code> is bewust niet interactief
+      opgenomen, want dat vereist onze eigen multisig-sleutels).
+    </div>
+    <div class="fg">
+      <div class="fi"><label>Darkpool</label><select id="e-darkpool">
+        <option value="trading">Trading</option>
+        <option value="medical">Medical</option>
+        <option value="supply">Supply chain + Carbon</option>
+        <option value="chip">Chip marketplace</option>
+      </select></div>
+      <div class="fi"><label>Bedrag (devnet SOL)</label><input type="number" id="e-amount" value="0.01" step="0.01"></div>
+    </div>
+    <div class="fg">
+      <div class="fi"><label>Verkoper-adres (of gebruik ons voorbeeldadres)</label>
+        <input type="text" id="e-seller" value="H45DRjCyZdGKGTofUyzAvHg8X1bqNmB1WbGzET6b7qyi"></div>
+    </div>
+    <button class="btn" id="e-btn-create" onclick="submitCreateEscrow()">1. Create escrow</button>
+    <button class="btn" id="e-btn-release" onclick="submitReleaseEscrow()">2a. Release (naar verkoper)</button>
+    <button class="btn" id="e-btn-dispute" onclick="submitDisputeEscrow()">2b. Dispute (bevriezen)</button>
+    <div class="cl">
+      <div class="cr"><div class="cn">1</div><span>Create escrow stort je devnet-SOL in een programma-account (PDA)</span></div>
+      <div class="cr"><div class="cn">2</div><span>Release keert direct uit aan de verkoper — normale, geslaagde deal</span></div>
+      <div class="cr"><div class="cn">3</div><span>Dispute bevriest de escrow; alleen de 2-van-3-multisig kan hem daarna nog vrijgeven of terugstorten</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="vtitle">Escrow-status</div>
+    <div class="fr"><span class="flbl">Laatste escrow-PDA</span><span class="fval" id="e-escrow-pda">—</span></div>
+    <div class="elog" id="escrow-log"></div>
+  </div>
+</div>
+
 <footer>
   Built with <a href="https://github.com/anoadder-ship-it/darkpool-circuits" target="_blank">@arcium-darkpool/sdk</a> &mdash;
   <a href="https://explorer.solana.com/address/h6zsnHt28NpeS94Ek3fQP1YEiu1WrpGT2pKynWZzKVX?cluster=devnet" target="_blank">Trading</a> ·
@@ -366,7 +413,7 @@ footer a:hover{text-decoration:underline}
 <script>
 var dn={340:'C34',174:'C50',250:'E11',411:'I21'};
 var mn={1001:'Steel',1002:'Aluminum',1003:'Copper',2001:'Semiconductors'};
-function setTab(n){document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',['t','m','s','c'][i]===n));document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));document.getElementById('pane-'+n).classList.add('on')}
+function setTab(n){document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',['t','m','s','c','e'][i]===n));document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));document.getElementById('pane-'+n).classList.add('on')}
 function hx(l){var c='0123456789abcdef',r='';for(var i=0;i<l;i++)r+=c[Math.floor(Math.random()*16)];return r}
 function anim(pfx,ids,orig,cb){
   ids.forEach(function(id,i){var e=document.getElementById(id);e.textContent=orig[i];e.classList.remove('enc')});
@@ -508,6 +555,10 @@ window.addEventListener("load",function(){
 });
 </script>
 <script src="darkpool-sdk.bundle.js"></script>
+<script src="trading-real-app.js"></script>
+<script src="medical-real-app.js"></script>
+<script src="supply-real-app.js"></script>
 <script src="chip-real-app.js"></script>
+<script src="escrow-demo-app.js"></script>
 </body>
 </html>

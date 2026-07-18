@@ -1,205 +1,12 @@
 {
-  "address": "6xLjbo4yfc5j2CMu69DkycTJrGZttHzeqieXf2NPvu8o",
+  "address": "3HQHpSBSgYkx81E25bSJZVz4mGoW6nQFJWDtZL9fmMR4",
   "metadata": {
-    "name": "chip_darkpool",
+    "name": "supply_chain_darkpool",
     "version": "0.1.0",
     "spec": "0.1.0",
     "description": "Created with Arcium & Anchor"
   },
   "instructions": [
-    {
-      "name": "aggregate_volume",
-      "discriminator": [
-        118,
-        166,
-        162,
-        105,
-        227,
-        231,
-        255,
-        124
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "sign_pda_account",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  65,
-                  114,
-                  99,
-                  105,
-                  117,
-                  109,
-                  83,
-                  105,
-                  103,
-                  110,
-                  101,
-                  114,
-                  65,
-                  99,
-                  99,
-                  111,
-                  117,
-                  110,
-                  116
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "name": "mxe_account"
-        },
-        {
-          "name": "mempool_account",
-          "writable": true
-        },
-        {
-          "name": "executing_pool",
-          "writable": true
-        },
-        {
-          "name": "computation_account",
-          "writable": true
-        },
-        {
-          "name": "comp_def_account"
-        },
-        {
-          "name": "cluster_account",
-          "writable": true
-        },
-        {
-          "name": "pool_account",
-          "writable": true,
-          "address": "G2sRWJvi3xoyh5k2gY49eG9L8YhAEWQPtNb1zb1GXTtC"
-        },
-        {
-          "name": "clock_account",
-          "writable": true,
-          "address": "7EbMUTLo5DjdzbN7s8BXeZwXzEwNQb1hScfRvWg8a6ot"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        },
-        {
-          "name": "arcium_program",
-          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
-        }
-      ],
-      "args": [
-        {
-          "name": "computation_offset",
-          "type": "u64"
-        },
-        {
-          "name": "enc_chip_type",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_volume",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_price",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "pubkey",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "nonce",
-          "type": "u128"
-        }
-      ]
-    },
-    {
-      "name": "aggregate_volume_callback",
-      "discriminator": [
-        224,
-        225,
-        14,
-        236,
-        144,
-        231,
-        133,
-        174
-      ],
-      "accounts": [
-        {
-          "name": "arcium_program",
-          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
-        },
-        {
-          "name": "comp_def_account"
-        },
-        {
-          "name": "mxe_account"
-        },
-        {
-          "name": "computation_account"
-        },
-        {
-          "name": "cluster_account"
-        },
-        {
-          "name": "instructions_sysvar",
-          "address": "Sysvar1nstructions1111111111111111111111111"
-        }
-      ],
-      "args": [
-        {
-          "name": "output",
-          "type": {
-            "defined": {
-              "name": "SignedComputationOutputs",
-              "generics": [
-                {
-                  "kind": "type",
-                  "type": {
-                    "defined": {
-                      "name": "AggregateVolumeOutput"
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
     {
       "name": "claim_after_timeout",
       "discriminator": [
@@ -378,106 +185,16 @@
       "args": []
     },
     {
-      "name": "init_aggregate_volume_comp_def",
+      "name": "init_match_carbon_comp_def",
       "discriminator": [
-        122,
-        48,
-        21,
-        182,
-        88,
-        239,
-        116,
-        105
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "mxe_account",
-          "writable": true
-        },
-        {
-          "name": "comp_def_account",
-          "writable": true
-        },
-        {
-          "name": "address_lookup_table",
-          "writable": true
-        },
-        {
-          "name": "lut_program",
-          "address": "AddressLookupTab1e1111111111111111111111111"
-        },
-        {
-          "name": "arcium_program",
-          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "init_match_chip_comp_def",
-      "discriminator": [
-        88,
-        56,
-        208,
-        84,
-        51,
-        96,
-        105,
-        155
-      ],
-      "accounts": [
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "mxe_account",
-          "writable": true
-        },
-        {
-          "name": "comp_def_account",
-          "writable": true
-        },
-        {
-          "name": "address_lookup_table",
-          "writable": true
-        },
-        {
-          "name": "lut_program",
-          "address": "AddressLookupTab1e1111111111111111111111111"
-        },
-        {
-          "name": "arcium_program",
-          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "init_register_chip_comp_def",
-      "discriminator": [
-        33,
-        179,
-        7,
-        229,
+        250,
         160,
-        94,
-        132,
-        182
+        79,
+        74,
+        195,
+        247,
+        51,
+        165
       ],
       "accounts": [
         {
@@ -513,16 +230,106 @@
       "args": []
     },
     {
-      "name": "match_chip",
+      "name": "init_match_supply_comp_def",
       "discriminator": [
-        209,
-        115,
-        241,
-        170,
-        169,
-        96,
+        144,
+        128,
+        168,
         142,
-        101
+        163,
+        215,
+        14,
+        166
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mxe_account",
+          "writable": true
+        },
+        {
+          "name": "comp_def_account",
+          "writable": true
+        },
+        {
+          "name": "address_lookup_table",
+          "writable": true
+        },
+        {
+          "name": "lut_program",
+          "address": "AddressLookupTab1e1111111111111111111111111"
+        },
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "init_register_supply_comp_def",
+      "discriminator": [
+        196,
+        98,
+        68,
+        16,
+        23,
+        70,
+        40,
+        161
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mxe_account",
+          "writable": true
+        },
+        {
+          "name": "comp_def_account",
+          "writable": true
+        },
+        {
+          "name": "address_lookup_table",
+          "writable": true
+        },
+        {
+          "name": "lut_program",
+          "address": "AddressLookupTab1e1111111111111111111111111"
+        },
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "match_carbon",
+      "discriminator": [
+        139,
+        127,
+        155,
+        203,
+        116,
+        149,
+        21,
+        158
       ],
       "accounts": [
         {
@@ -609,25 +416,7 @@
           "type": "u64"
         },
         {
-          "name": "enc_chip_type",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_quantity",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_condition",
+          "name": "enc_credits",
           "type": {
             "array": [
               "u8",
@@ -645,16 +434,7 @@
           }
         },
         {
-          "name": "enc_delivery",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_list_region",
+          "name": "enc_vintage",
           "type": {
             "array": [
               "u8",
@@ -672,25 +452,7 @@
           }
         },
         {
-          "name": "enc_req_chip_type",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_min_quantity",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_max_condition",
+          "name": "enc_req_cred",
           "type": {
             "array": [
               "u8",
@@ -708,7 +470,7 @@
           }
         },
         {
-          "name": "enc_max_delivery",
+          "name": "enc_req_vint",
           "type": {
             "array": [
               "u8",
@@ -717,16 +479,7 @@
           }
         },
         {
-          "name": "enc_req_region",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
-          "name": "enc_min_cert",
+          "name": "enc_req_cert",
           "type": {
             "array": [
               "u8",
@@ -750,16 +503,16 @@
       ]
     },
     {
-      "name": "match_chip_callback",
+      "name": "match_carbon_callback",
       "discriminator": [
-        159,
-        107,
-        7,
-        18,
-        239,
-        163,
-        158,
-        102
+        206,
+        236,
+        151,
+        156,
+        165,
+        249,
+        109,
+        210
       ],
       "accounts": [
         {
@@ -794,7 +547,7 @@
                   "kind": "type",
                   "type": {
                     "defined": {
-                      "name": "MatchChipOutput"
+                      "name": "MatchCarbonOutput"
                     }
                   }
                 }
@@ -805,16 +558,16 @@
       ]
     },
     {
-      "name": "register_chip",
+      "name": "match_supply",
       "discriminator": [
-        27,
-        126,
-        180,
-        110,
-        111,
-        12,
-        74,
-        225
+        131,
+        212,
+        211,
+        102,
+        139,
+        0,
+        223,
+        237
       ],
       "accounts": [
         {
@@ -901,7 +654,7 @@
           "type": "u64"
         },
         {
-          "name": "enc_chip_type",
+          "name": "enc_material",
           "type": {
             "array": [
               "u8",
@@ -919,7 +672,281 @@
           }
         },
         {
-          "name": "enc_condition",
+          "name": "enc_quality",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_price",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_delivery",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_s_region",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_req_mat",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_min_qty",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_min_qual",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_max_price",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_max_del",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_req_reg",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "pubkey",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "nonce",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "match_supply_callback",
+      "discriminator": [
+        241,
+        61,
+        144,
+        196,
+        218,
+        28,
+        185,
+        97
+      ],
+      "accounts": [
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        },
+        {
+          "name": "comp_def_account"
+        },
+        {
+          "name": "mxe_account"
+        },
+        {
+          "name": "computation_account"
+        },
+        {
+          "name": "cluster_account"
+        },
+        {
+          "name": "instructions_sysvar",
+          "address": "Sysvar1nstructions1111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "output",
+          "type": {
+            "defined": {
+              "name": "SignedComputationOutputs",
+              "generics": [
+                {
+                  "kind": "type",
+                  "type": {
+                    "defined": {
+                      "name": "MatchSupplyOutput"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "register_supply",
+      "discriminator": [
+        150,
+        229,
+        44,
+        242,
+        68,
+        26,
+        247,
+        200
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "sign_pda_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  65,
+                  114,
+                  99,
+                  105,
+                  117,
+                  109,
+                  83,
+                  105,
+                  103,
+                  110,
+                  101,
+                  114,
+                  65,
+                  99,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mxe_account"
+        },
+        {
+          "name": "mempool_account",
+          "writable": true
+        },
+        {
+          "name": "executing_pool",
+          "writable": true
+        },
+        {
+          "name": "computation_account",
+          "writable": true
+        },
+        {
+          "name": "comp_def_account"
+        },
+        {
+          "name": "cluster_account",
+          "writable": true
+        },
+        {
+          "name": "pool_account",
+          "writable": true,
+          "address": "G2sRWJvi3xoyh5k2gY49eG9L8YhAEWQPtNb1zb1GXTtC"
+        },
+        {
+          "name": "clock_account",
+          "writable": true,
+          "address": "7EbMUTLo5DjdzbN7s8BXeZwXzEwNQb1hScfRvWg8a6ot"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "arcium_program",
+          "address": "Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ"
+        }
+      ],
+      "args": [
+        {
+          "name": "computation_offset",
+          "type": "u64"
+        },
+        {
+          "name": "enc_material",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_quantity",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "enc_quality",
           "type": {
             "array": [
               "u8",
@@ -955,15 +982,6 @@
           }
         },
         {
-          "name": "enc_cert",
-          "type": {
-            "array": [
-              "u8",
-              32
-            ]
-          }
-        },
-        {
           "name": "pubkey",
           "type": {
             "array": [
@@ -979,16 +997,16 @@
       ]
     },
     {
-      "name": "register_chip_callback",
+      "name": "register_supply_callback",
       "discriminator": [
-        221,
-        88,
-        119,
-        1,
-        73,
-        145,
-        208,
-        185
+        196,
+        21,
+        239,
+        5,
+        150,
+        105,
+        216,
+        59
       ],
       "accounts": [
         {
@@ -1023,7 +1041,7 @@
                   "kind": "type",
                   "type": {
                     "defined": {
-                      "name": "RegisterChipOutput"
+                      "name": "RegisterSupplyOutput"
                     }
                   }
                 }
@@ -1189,29 +1207,16 @@
   ],
   "events": [
     {
-      "name": "ChipMatchedEvent",
+      "name": "CarbonMatchedEvent",
       "discriminator": [
-        106,
-        10,
-        13,
-        89,
-        118,
-        79,
-        178,
-        132
-      ]
-    },
-    {
-      "name": "ChipRegisteredEvent",
-      "discriminator": [
-        45,
-        209,
-        187,
-        43,
-        154,
-        216,
-        117,
-        242
+        224,
+        211,
+        74,
+        180,
+        141,
+        128,
+        49,
+        206
       ]
     },
     {
@@ -1267,16 +1272,29 @@
       ]
     },
     {
-      "name": "VolumeAggregatedEvent",
+      "name": "SupplyMatchedEvent",
       "discriminator": [
-        90,
-        88,
-        226,
+        213,
+        28,
+        91,
+        213,
         22,
-        84,
-        121,
-        15,
-        14
+        44,
+        45,
+        133
+      ]
+    },
+    {
+      "name": "SupplyRegisteredEvent",
+      "discriminator": [
+        191,
+        66,
+        164,
+        198,
+        163,
+        40,
+        146,
+        142
       ]
     }
   ],
@@ -1289,32 +1307,32 @@
     {
       "code": 6001,
       "name": "InvalidEscrowAmount",
-      "msg": "Escrow-bedrag moet groter dan nul zijn"
+      "msg": "Escrow amount must be greater than zero"
     },
     {
       "code": 6002,
       "name": "InvalidEscrowStatus",
-      "msg": "Escrow staat niet in de verwachte status voor deze actie"
+      "msg": "Escrow is not in the required status for this action"
     },
     {
       "code": 6003,
       "name": "UnauthorizedEscrowAction",
-      "msg": "Alleen koper of verkoper mag dit escrow-account aanroepen"
+      "msg": "This account is not authorized to perform this escrow action"
     },
     {
       "code": 6004,
-      "name": "UnauthorizedArbiter",
-      "msg": "Alleen de multisig-vault mag een geschil beslechten"
+      "name": "DisputeWindowClosed",
+      "msg": "The dispute window for this escrow has closed"
     },
     {
       "code": 6005,
-      "name": "DisputeWindowClosed",
-      "msg": "Dispute-termijn is al verstreken"
+      "name": "DisputeWindowStillOpen",
+      "msg": "The dispute window for this escrow is still open"
     },
     {
       "code": 6006,
-      "name": "DisputeWindowStillOpen",
-      "msg": "Dispute-termijn is nog niet verstreken"
+      "name": "UnauthorizedArbiter",
+      "msg": "Only the vault PDA (multisig) may resolve a dispute"
     }
   ],
   "types": [
@@ -1336,32 +1354,6 @@
             "type": {
               "defined": {
                 "name": "Epoch"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "AggregateVolumeOutput",
-      "docs": [
-        "The output of the callback instruction. Provided as a struct with ordered fields",
-        "as anchor does not support tuples and tuple structs yet."
-      ],
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "field_0",
-            "type": {
-              "defined": {
-                "name": "SharedEncryptedStruct",
-                "generics": [
-                  {
-                    "kind": "const",
-                    "value": "1"
-                  }
-                ]
               }
             }
           }
@@ -1395,42 +1387,7 @@
       }
     },
     {
-      "name": "ChipMatchedEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "matched",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "score",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "nonce",
-            "type": {
-              "array": [
-                "u8",
-                16
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "ChipRegisteredEvent",
+      "name": "CarbonMatchedEvent",
       "type": {
         "kind": "struct",
         "fields": [
@@ -2102,7 +2059,33 @@
       }
     },
     {
-      "name": "MatchChipOutput",
+      "name": "MatchCarbonOutput",
+      "docs": [
+        "The output of the callback instruction. Provided as a struct with ordered fields",
+        "as anchor does not support tuples and tuple structs yet."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "field_0",
+            "type": {
+              "defined": {
+                "name": "SharedEncryptedStruct",
+                "generics": [
+                  {
+                    "kind": "const",
+                    "value": "1"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MatchSupplyOutput",
       "docs": [
         "The output of the callback instruction. Provided as a struct with ordered fields",
         "as anchor does not support tuples and tuple structs yet."
@@ -2365,7 +2348,7 @@
       }
     },
     {
-      "name": "RegisterChipOutput",
+      "name": "RegisterSupplyOutput",
       "docs": [
         "The output of the callback instruction. Provided as a struct with ordered fields",
         "as anchor does not support tuples and tuple structs yet."
@@ -2512,6 +2495,67 @@
       }
     },
     {
+      "name": "SupplyMatchedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "matched",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "score",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "SupplyRegisteredEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "result",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "Timestamp",
       "type": {
         "kind": "struct",
@@ -2561,32 +2605,6 @@
               "array": [
                 "u8",
                 64
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "VolumeAggregatedEvent",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "result",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
-            "name": "nonce",
-            "type": {
-              "array": [
-                "u8",
-                16
               ]
             }
           }

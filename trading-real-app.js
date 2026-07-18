@@ -63,6 +63,7 @@ async function submitRealTradingMatch() {
         PROGRAM_ID,
         readUInt32LE(SDK.getCompDefAccOffset('match_orders'))
       ),
+      moerasPool: new SDK.PublicKey('Hp9jftCAo9UWE6tGmkYYqT8ChybJMnwi8uTFHg2fu2fq'),
     };
 
     statusEl.textContent = 'Wachten op Phantom-ondertekening...';

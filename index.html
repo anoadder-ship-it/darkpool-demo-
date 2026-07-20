@@ -390,6 +390,11 @@ footer a:hover{text-decoration:underline}
     <button class="btn" id="e-btn-create" onclick="submitCreateEscrow()">1. Create escrow</button>
     <button class="btn" id="e-btn-release" onclick="submitReleaseEscrow()">2a. Release (naar verkoper)</button>
     <button class="btn" id="e-btn-dispute" onclick="submitDisputeEscrow()">2b. Dispute (bevriezen)</button>
+    <div class="fg">
+      <div class="fi"><label>Escrow-PDA om te checken op verloren dispute (bv. na eigen dispute-uitkomst)</label>
+        <input type="text" id="e-check-pda" placeholder="Escrow-PDA"></div>
+    </div>
+    <button class="btn" id="e-btn-check-dispute" onclick="checkDisputeOutcome()">Check dispute-uitkomst</button>
     <div class="cl">
       <div class="cr"><div class="cn">1</div><span>Create escrow stort je devnet-SOL in een programma-account (PDA)</span></div>
       <div class="cr"><div class="cn">2</div><span>Release keert direct uit aan de verkoper — normale, geslaagde deal</span></div>

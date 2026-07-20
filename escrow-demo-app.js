@@ -196,6 +196,60 @@ async function submitUpdateReputation(isCompletion) {
   }
 }
 
+
+// === Check op verloren dispute (voor de verliezende verkoper, client-side) ===
+function checkedDisputesKey(walletAddress) {
+  return `darkpool_checked_disputes_${walletAddress}`;
+}
+function loadCheckedDisputes(walletAddress) {
+  try {
+    const raw = localStorage.getItem(checkedDisputesKey(walletAddress));
+    if (raw) return JSON.parse(raw);
+  } catch (e) { /* corrupte data -> vers beginnen */ }
+  return [];
+}
+function markDisputeChecked(walletAddress, escrowPda) {
+  const list = loadCheckedDisputes(walletAddress);
+  list.push(escrowPda);
+  localStorage.setItem(checkedDisputesKey(walletAddress), JSON.stringify(list));
+}
+
+async function checkDisputeOutcome() {
+  if (!wPub) { alert('Verbind eerst je Phantom wallet.'); return; }
+  const pdaInput = document.getElementById('e-check-pda').value.trim();
+  if (!pdaInput) { alert('Vul een escrow-PDA in.'); return; }
+  escrowLogAction('Dispute-check', `escrow ${pdaInput} uitlezen...`, '');
+  try {
+    const { SDK, prog, ownerPubkey } = await getEscrowProgram();
+    const escrowPda = new SDK.PublicKey(pdaInput);
+    const escrow = await prog.account.escrowAccount.fetch(escrowPda);
+    const statusKey = Object.keys(escrow.status)[0];
+    escrowLogAction('Dispute-check resultaat',
+      `status=${statusKey} | buyer=${escrow.buyer.toString()} | seller=${escrow.seller.toString()}`, '');
+
+    if (statusKey !== 'refunded') {
+      escrowLogAction('Dispute-check', 'Geen verloren dispute voor de verkoper (status is niet "Refunded") -- geen actie nodig.', '');
+      return;
+    }
+    if (escrow.seller.toString() !== ownerPubkey.toString()) {
+      escrowLogAction('Dispute-check', 'Deze escrow is Refunded, maar het verbonden wallet is niet de verkoper -- geen actie voor dit wallet.', '');
+      return;
+    }
+    const already = loadCheckedDisputes(ownerPubkey.toString());
+    if (already.includes(escrowPda.toString())) {
+      escrowLogAction('Dispute-check', 'Deze verloren dispute is al eerder verwerkt -- geen dubbele straf.', '');
+      return;
+    }
+
+    escrowLogAction('Dispute-check', 'Verloren dispute gedetecteerd voor dit wallet -- reputatie wordt bijgewerkt...', '');
+    await submitUpdateReputation(false);
+    markDisputeChecked(ownerPubkey.toString(), escrowPda.toString());
+  } catch (e) {
+    console.error(e);
+    escrowLogAction('Fout bij dispute-check', e.message || String(e), 'err');
+  }
+}
+
 async function submitReleaseEscrow() {
   if (!wPub) { alert('Verbind eerst je Phantom wallet.'); return; }
   if (!lastEscrowPda) { alert('Maak eerst een escrow aan met "1. Create escrow".'); return; }

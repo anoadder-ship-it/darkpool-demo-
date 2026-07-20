@@ -129,6 +129,19 @@ function saveReputationState(walletAddress, state) {
   localStorage.setItem(reputationStorageKey(walletAddress), JSON.stringify(state));
 }
 
+
+function refreshReputationDisplay() {
+  const el = document.getElementById('e-reputation-display');
+  if (!el || !wPub) return;
+  const state = loadReputationState(wPub);
+  if (state.completed_trades === 0 && state.disputes_lost === 0) {
+    el.textContent = 'nog geen data — voltooi een trade of check een dispute';
+    return;
+  }
+  el.textContent = `score ${state.score}/1000 (${state.completed_trades} voltooid, ${state.disputes_lost} dispute(s) verloren)`;
+}
+window.refreshReputationDisplay = refreshReputationDisplay;
+
 async function submitUpdateReputation(isCompletion) {
   try {
     const { SDK, prog, PROGRAM_ID, ownerPubkey } = await getEscrowProgram();
@@ -190,6 +203,7 @@ async function submitUpdateReputation(isCompletion) {
     saveReputationState(ownerPubkey.toString(), next);
 
     escrowLogAction('update_reputation GESLAAGD', `Nieuwe score: ${score} | Tx: ${sig}`, 'ok');
+    refreshReputationDisplay();
   } catch (e) {
     console.error(e);
     escrowLogAction('Fout bij update_reputation', e.message || String(e), 'err');

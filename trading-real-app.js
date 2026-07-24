@@ -4,7 +4,7 @@
 // Eigenaarschap: plaintext owners[] array on-chain (niet versleuteld)
 
 const TRADING_CLUSTER = 456;
-const TRADING_PROGRAM_ID_STR = "h6zsnHt28NpeS94Ek3fQP1YEiu1WrpGT2pKynWZzKVX";
+const TRADING_PROGRAM_ID_STR = "9fJMPmZH6aoHY3CLEZQwgmpJjGfFZnPPMEATaWDUGK7A";
 const TRADING_RPC = "https://solana-devnet.core.chainstack.com/82e99e28fb99448c56b313e55d740497";
 
 function readUInt32LE(bytes) {
